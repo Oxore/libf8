@@ -22,8 +22,6 @@ CFLAGS+=-Wpedantic
 LDFLAGS+=$(COMMON)
 
 LDFLAGS_TEST+=$(LDFLAGS)
-LDFLAGS_TEST+=-L.
-LDFLAGS_TEST+=-l:libf8.a
 
 #======================================================================
 
@@ -33,7 +31,7 @@ ifndef NOTEST
 all: $(TARGET_TEST)
 endif
 
-$(TARGET_TEST): $(TARGET_TEST).c.o $(MUNIT)/munit.c.o f8.c.o
+$(TARGET_TEST): $(TARGET_TEST).c.o $(MUNIT)/munit.c.o $(TARGET_LIB)
 	@ echo "  LD      $@"
 	$(Q) $(CC) -o $@ $^ $(LDFLAGS_TEST)
 	./test
