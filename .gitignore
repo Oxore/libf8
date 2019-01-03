@@ -1,0 +1,5 @@
+test
+*.o
+libf8.a
+tags
+compile_commands.js
