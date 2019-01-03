@@ -74,7 +74,7 @@ static MunitResult test_utf8to32_strcpy(
         wchar_t *str = malloc((len + 1) * sizeof(wchar_t));
         wchar_t *dest = utf8to32_strcpy(str, f[i].utf8);
         munit_assert_ptr(dest, ==, str);
-        munit_assert_uint(memcmp(str, f[i].utf32, len), ==, 0);
+        munit_assert_uint(memcmp(str, f[i].utf32, len * sizeof(wchar_t)), ==, 0);
         free(str);
     }
 

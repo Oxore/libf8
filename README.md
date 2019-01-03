@@ -1,9 +1,10 @@
 ## libf8
 ![WTFPL](http://www.wtfpl.net/wp-content/uploads/2012/12/wtfpl-badge-2.png "WTFPL")
 
-This is small unicode library made by myself for my little demands.
+This is small library of unicode helper functions made for my little demands.
+In is like a `string.h` for unicode in some way.
 
-If you think you can use my library as is, then **think twice**, because it has no unicode validity check and almost certainly lacks of some crucial functionality you need.
+If you think you could use my library as is, then **look carefully**, because it has no unicode validity check and almost certainly lacks of some crucial functionality you need.
 If I need something, I implement this.
 If you want, you can do it too - welcome.
 
