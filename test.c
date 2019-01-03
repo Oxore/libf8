@@ -1,6 +1,5 @@
-#include "munit.h"
-
 #include "f8.h"
+#include "munit.h"
 
 struct u_pair {
     char    *utf8;

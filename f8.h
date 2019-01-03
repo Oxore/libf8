@@ -5,6 +5,7 @@
  *
  * */
 
+#include <wchar.h>
 
 /*
  * Returns number of characters in str.
