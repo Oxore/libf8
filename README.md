@@ -1,4 +1,5 @@
 ## libf8
+[![Build Status](https://travis-ci.org/Oxore/libf8.svg?branch=master)](https://travis-ci.org/Oxore/libf8)
 ![WTFPL](http://www.wtfpl.net/wp-content/uploads/2012/12/wtfpl-badge-2.png "WTFPL")
 
 This is small library of unicode helper functions made for my little demands.
