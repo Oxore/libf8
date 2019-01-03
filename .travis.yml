@@ -1,0 +1,12 @@
+language: c
+os: osx
+
+before_script:
+    - git submodule update --init --recursive
+
+script:
+    - make all
+    - ./test
+
+compiler:
+    - gcc

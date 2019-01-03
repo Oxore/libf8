@@ -40,7 +40,7 @@ $(TARGET_TEST): $(TARGET_TEST).c.o $(MUNIT)/munit.c.o f8.c.o
 
 $(TARGET_LIB): f8.c.o
 	@ echo "  AR      $@"
-	$(Q) $(AR) rcs -o $@ $^
+	$(Q) $(AR) rcs $@ $^
 
 %.c.o: %.c
 	@ echo "  CC      $@"
