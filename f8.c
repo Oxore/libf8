@@ -26,13 +26,13 @@ size_t utf8_strlen(char *string)
     return len;
 }
 
-void utf8to32_strcpy(wchar_t *dest, char *src)
+wchar_t *utf8to32_strcpy(wchar_t *dest, char *src)
 {
     wchar_t *dc = dest;
     char *c = src;
     size_t len = 0;
     while (*c) {
-        int clen = utf8_char_len(*c);
+        size_t clen = utf8_char_len(*c);
         if (clen == 1) {
             dc[len] = c[0] & 0x7f;
         } else if (clen == 2) {
@@ -45,10 +45,36 @@ void utf8to32_strcpy(wchar_t *dest, char *src)
                 | ((c[2] & 0x3f) << 6) | ((c[3] & 0x3f) << 0);
         } else {
             dc[len] = 0;
-            return;
+            return dest;
         }
         c += clen;
         ++len;
     }
     dc[len] = 0;
+    return dest;
+}
+
+char *utf8_strncpy(char *dest, char *src, size_t n)
+{
+    char *d = dest;
+    for ( ; *src && n; --n) {
+        size_t char_len = utf8_char_len(*src);
+        for (size_t i = 0; i < char_len; ++i)
+            d[i] = src[i];
+        src += char_len;
+        d += char_len;
+    }
+    *d = 0;
+    return dest;
+}
+
+size_t utf8_strsizen(char *str, size_t n)
+{
+    size_t size = 0;
+    for ( ; *str && n; --n) {
+        size_t char_len = utf8_char_len(*str);
+        size += char_len;
+        str += char_len;
+    }
+    return size;
 }
