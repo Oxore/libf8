@@ -99,22 +99,35 @@ static MunitResult test_utf8_strncpy(
 
     for (int i = 0; i < 4; i++) {
         size_t len = utf8_strlen(f[i].utf8);
-        char *str = malloc((len + 1) * sizeof(char));
+        size_t size = (len * (i + 1) + 1) * sizeof(char);
+        char *str = malloc(size);
+
         char *dest = utf8_strncpy(str, f[i].utf8, 100);
+
         munit_assert_ptr(dest, ==, str);
-        munit_assert_uint(memcmp(str, f[i].utf8, len), ==, 0);
+        munit_assert_uint(memcmp(str, f[i].utf8, size - 1 * sizeof(char)),
+                ==,
+                0);
+        munit_assert_uchar(*(str + size - 1 * sizeof(char)), ==, 0);
+
         free(str);
     }
 
     for (int i = 0; i < 4; i++) {
         size_t len = utf8_strlen(f[i].utf8);
         for (size_t j = 0; j < len; j++) {
-#define SIZE j * (i + 1)
-            char *str = malloc((len + 1) * sizeof(char));
+            size_t size = (j * (i + 1) + 1) * sizeof(char);
+            char *str = malloc(size);
+
             char *dest = utf8_strncpy(str, f[i].utf8, j);
+
             munit_assert_ptr(dest, ==, str);
-            munit_assert_uint(memcmp(str, f[i].utf8, SIZE), ==, 0);
-            munit_assert_uchar(*(str + SIZE), ==, 0);
+            munit_assert_uint(
+                    memcmp(str, f[i].utf8, size - 1 * sizeof(char)),
+                    ==,
+                    0);
+            munit_assert_uchar(*(str + size - 1 * sizeof(char)), ==, 0);
+
             free(str);
         }
     }
