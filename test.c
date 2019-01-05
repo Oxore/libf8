@@ -163,11 +163,11 @@ static MunitResult test_utf8_strnsize(
     return MUNIT_OK;
 }
 
-static const MunitSuite test_suite = {
+static const MunitSuite test_suite_f8 = {
     "unit",
     (MunitTest[]){
         {
-            "/unicode/utf8_strlen",
+            "/f8/utf8_strlen",
             test_utf8_strlen,
             test_utf8_strlen_setup,
             NULL,
@@ -175,7 +175,7 @@ static const MunitSuite test_suite = {
             NULL
         },
         {
-            "/unicode/utf8to32_strcpy",
+            "/f8/utf8to32_strcpy",
             test_utf8to32_strcpy,
             test_utf8to32_strcpy_setup,
             NULL,
@@ -183,7 +183,7 @@ static const MunitSuite test_suite = {
             NULL
         },
         {
-            "/unicode/utf8_strncpy",
+            "/f8/utf8_strncpy",
             test_utf8_strncpy,
             test_utf8_strncpy_setup,
             NULL,
@@ -191,7 +191,7 @@ static const MunitSuite test_suite = {
             NULL
         },
         {
-            "/unicode/utf8_strnsize",
+            "/f8/utf8_strnsize",
             test_utf8_strnsize,
             test_utf8_strnsize_setup,
             NULL,
@@ -207,5 +207,5 @@ static const MunitSuite test_suite = {
 
 int main(int argc, char **argv)
 {
-    return munit_suite_main(&test_suite, text_fixture, argc, argv);
+    return munit_suite_main(&test_suite_f8, text_fixture, argc, argv);
 }
