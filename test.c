@@ -135,7 +135,7 @@ static MunitResult test_utf8_strncpy(
     return MUNIT_OK;
 }
 
-static void *test_utf8_strsizen_setup(
+static void *test_utf8_strnsize_setup(
         const MunitParameter    params[],
         void                   *user_data)
 {
@@ -144,7 +144,7 @@ static void *test_utf8_strsizen_setup(
     return user_data;
 }
 
-static MunitResult test_utf8_strsizen(
+static MunitResult test_utf8_strnsize(
         const MunitParameter    params[],
         void                   *fixture)
 {
@@ -155,7 +155,7 @@ static MunitResult test_utf8_strsizen(
     for (int i = 0; i < 4; i++) {
         size_t len = utf8_strlen(f[i].utf8);
         for (size_t j = 0; j < len; j++) {
-            size_t size = utf8_strsizen(f[i].utf8, j);
+            size_t size = utf8_strnsize(f[i].utf8, j);
             munit_assert_uint(size, ==, j * (i + 1));
         }
     }
@@ -191,9 +191,9 @@ static const MunitSuite test_suite = {
             NULL
         },
         {
-            "/unicode/utf8_strsizen",
-            test_utf8_strsizen,
-            test_utf8_strsizen_setup,
+            "/unicode/utf8_strnsize",
+            test_utf8_strnsize,
+            test_utf8_strnsize_setup,
             NULL,
             MUNIT_TEST_OPTION_NONE,
             NULL

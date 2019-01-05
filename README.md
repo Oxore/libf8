@@ -22,7 +22,7 @@ make
 ```
 
 It will produce a `libf8.a` archive you can use for static linkage.
-Use `-l:libf8.a` flag while linking with it.
+Use `-l:libf8.a` flag while linking with it or use it just as any other `.o` object file.
 
 Build without tests:
 
@@ -38,4 +38,4 @@ make clean
 
 ---
 
-v0.2.2
+v0.3.0

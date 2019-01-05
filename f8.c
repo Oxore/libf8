@@ -17,19 +17,19 @@ static inline size_t utf8_char_len(unsigned char c)
         return 0;
 }
 
-size_t utf8_strlen(char *string)
+size_t utf8_strlen(const char *string)
 {
     size_t len = 0, keep = 0;
-    for (char *c = string; *c; (keep ? --keep : ++len), ++c)
+    for (const char *c = string; *c; (keep ? --keep : ++len), ++c)
         if (!keep)
             keep = (keep = utf8_char_len(*c)) ? keep - 1 : keep;
     return len;
 }
 
-wchar_t *utf8to32_strcpy(wchar_t *dest, char *src)
+wchar_t *utf8to32_strcpy(wchar_t *dest, const char *src)
 {
     wchar_t *dc = dest;
-    char *c = src;
+    const char *c = src;
     size_t len = 0;
     while (*c) {
         size_t clen = utf8_char_len(*c);
@@ -54,7 +54,7 @@ wchar_t *utf8to32_strcpy(wchar_t *dest, char *src)
     return dest;
 }
 
-char *utf8_strncpy(char *dest, char *src, size_t n)
+char *utf8_strncpy(char *dest, const char *src, size_t n)
 {
     char *d = dest;
     for ( ; *src && n; --n) {
@@ -68,7 +68,7 @@ char *utf8_strncpy(char *dest, char *src, size_t n)
     return dest;
 }
 
-size_t utf8_strsizen(char *str, size_t n)
+size_t utf8_strnsize(const char *str, size_t n)
 {
     size_t size = 0;
     for ( ; *str && n; --n) {
