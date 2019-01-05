@@ -3,7 +3,7 @@
 ![WTFPL](http://www.wtfpl.net/wp-content/uploads/2012/12/wtfpl-badge-2.png "WTFPL")
 
 This is small library of unicode helper functions made for my little demands.
-In is like a `string.h` for unicode in some way.
+It is like a `string.h` for unicode in some way.
 
 If you think you could use my library as is, then **look carefully**, because it has no unicode validity check and almost certainly lacks of some crucial functionality you need.
 If I need something, I implement this.
