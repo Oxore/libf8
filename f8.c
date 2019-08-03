@@ -17,6 +17,24 @@ static inline size_t utf8_char_len(unsigned char c)
         return 0;
 }
 
+static inline int32_t utf8to32_char(const char *c, size_t clen)
+{
+    switch (clen) {
+    case 1:
+        return c[0] & 0x7f;
+    case 2:
+        return ((c[0] & 0x1f) << 6) | ((c[1] & 0x3f) << 0);
+    case 3:
+        return ((c[0] & 0x0f) << 12) | ((c[1] & 0x3f) << 6)
+            | ((c[2] & 0x3f) << 0);
+    case 4:
+        return ((c[0] & 0x07) << 18) | ((c[1] & 0x3f) << 12)
+            | ((c[2] & 0x3f) << 6) | ((c[3] & 0x3f) << 0);
+    default:
+        return 0;
+    }
+}
+
 size_t utf8_strlen(const char *string)
 {
     size_t len = 0, keep = 0;
@@ -33,20 +51,8 @@ int32_t *utf8to32_strcpy(int32_t *dest, const char *src)
     size_t len = 0;
     while (*c) {
         size_t clen = utf8_char_len(*c);
-        if (clen == 1) {
-            dc[len] = c[0] & 0x7f;
-        } else if (clen == 2) {
-            dc[len] = ((c[0] & 0x1f) << 6) | ((c[1] & 0x3f) << 0);
-        } else if (clen == 3) {
-            dc[len] = ((c[0] & 0x0f) << 12) | ((c[1] & 0x3f) << 6)
-                | ((c[2] & 0x3f) << 0);
-        } else if (clen == 4) {
-            dc[len] = ((c[0] & 0x07) << 18) | ((c[1] & 0x3f) << 12)
-                | ((c[2] & 0x3f) << 6) | ((c[3] & 0x3f) << 0);
-        } else {
-            dc[len] = 0;
-            return dest;
-        }
+        if ((dest[len] = utf8to32_char(c, clen)) == 0)
+            return dest; // Probably an invalid character
         c += clen;
         ++len;
     }
