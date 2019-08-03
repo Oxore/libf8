@@ -2,4 +2,5 @@ test
 *.o
 libf8.a
 tags
-compile_commands.js
+compile_commands.json
+build/
