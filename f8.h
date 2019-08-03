@@ -5,7 +5,8 @@
  *
  * */
 
-#include <wchar.h>
+#include <stddef.h>
+#include <stdint.h>
 
 /*
  * Returns number of characters in str.
@@ -19,7 +20,7 @@ size_t      utf8_strlen(const char *str);
  * Converts UTF8 to UTF32.
  *
  * */
-wchar_t    *utf8to32_strcpy(wchar_t *dest, const char *src);
+int32_t    *utf8to32_strcpy(int32_t *dest, char *src);
 
 /*
  * Differs from standard strcpy by ensuring null-terminated dest string.

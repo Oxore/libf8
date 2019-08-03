@@ -3,7 +3,7 @@
 
 struct u_pair {
     char    *utf8;
-    wchar_t *utf32;
+    int32_t *utf32;
 };
 
 struct u_pair text_fixture[] = {
@@ -70,10 +70,10 @@ static MunitResult test_utf8to32_strcpy(
 
     for (int i = 0; i < 4; i++) {
         size_t len = utf8_strlen(f[i].utf8);
-        wchar_t *str = malloc((len + 1) * sizeof(wchar_t));
-        wchar_t *dest = utf8to32_strcpy(str, f[i].utf8);
+        int32_t *str = malloc((len + 1) * sizeof(int32_t));
+        int32_t *dest = utf8to32_strcpy(str, f[i].utf8);
         munit_assert_ptr(dest, ==, str);
-        munit_assert_uint(memcmp(str, f[i].utf32, len * sizeof(wchar_t)), ==, 0);
+        munit_assert_uint(memcmp(str, f[i].utf32, len * sizeof(int32_t)), ==, 0);
         free(str);
     }
 
