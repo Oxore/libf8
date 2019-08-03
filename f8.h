@@ -20,7 +20,7 @@ size_t      utf8_strlen(const char *str);
  * Converts UTF8 to UTF32.
  *
  * */
-int32_t    *utf8to32_strcpy(int32_t *dest, char *src);
+int32_t    *utf8to32_strcpy(int32_t *dest, const char *src);
 
 /*
  * Differs from standard strcpy by ensuring null-terminated dest string.
@@ -32,7 +32,7 @@ char       *utf8_strncpy(char *dest, const char *src, size_t n);
 /*
  * Returns size of first n utf8 characters of str in bytes.
  *
- * Terminating null character does not counts.
+ * Terminating null character is not counted.
  *
  * */
 size_t      utf8_strnsize(const char *str, size_t n);

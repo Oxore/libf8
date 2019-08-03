@@ -26,10 +26,10 @@ size_t utf8_strlen(const char *string)
     return len;
 }
 
-int32_t *utf8to32_strcpy(int32_t *dest, char *src)
+int32_t *utf8to32_strcpy(int32_t *dest, const char *src)
 {
     int32_t *dc = dest;
-    char *c = src;
+    const char *c = src;
     size_t len = 0;
     while (*c) {
         size_t clen = utf8_char_len(*c);
