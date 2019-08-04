@@ -26,7 +26,7 @@ struct u_pair text_fixture[] = {
 };
 
 
-static void *test_utf8_strlen_setup(
+static void *test_common_setup(
         const MunitParameter    params[],
         void                   *user_data)
 {
@@ -51,15 +51,6 @@ static MunitResult test_utf8_strlen(
     return MUNIT_OK;
 }
 
-static void *test_utf8to32_strcpy_setup(
-        const MunitParameter    params[],
-        void                   *user_data)
-{
-    (void) params;
-
-    return user_data;
-}
-
 static MunitResult test_utf8to32_strcpy(
         const MunitParameter    params[],
         void                   *fixture)
@@ -78,15 +69,6 @@ static MunitResult test_utf8to32_strcpy(
     }
 
     return MUNIT_OK;
-}
-
-static void *test_utf8_strncpy_setup(
-        const MunitParameter    params[],
-        void                   *user_data)
-{
-    (void) params;
-
-    return user_data;
 }
 
 static MunitResult test_utf8_strncpy(
@@ -135,15 +117,6 @@ static MunitResult test_utf8_strncpy(
     return MUNIT_OK;
 }
 
-static void *test_utf8_strnsize_setup(
-        const MunitParameter    params[],
-        void                   *user_data)
-{
-    (void) params;
-
-    return user_data;
-}
-
 static MunitResult test_utf8_strnsize(
         const MunitParameter    params[],
         void                   *fixture)
@@ -169,40 +142,29 @@ static const MunitSuite test_suite_f8 = {
         {
             "/f8/utf8_strlen",
             test_utf8_strlen,
-            test_utf8_strlen_setup,
-            NULL,
-            MUNIT_TEST_OPTION_NONE,
-            NULL
+            test_common_setup,
+            NULL, MUNIT_TEST_OPTION_NONE, NULL
         },
         {
             "/f8/utf8to32_strcpy",
             test_utf8to32_strcpy,
-            test_utf8to32_strcpy_setup,
-            NULL,
-            MUNIT_TEST_OPTION_NONE,
-            NULL
+            test_common_setup,
+            NULL, MUNIT_TEST_OPTION_NONE, NULL
         },
         {
             "/f8/utf8_strncpy",
             test_utf8_strncpy,
-            test_utf8_strncpy_setup,
-            NULL,
-            MUNIT_TEST_OPTION_NONE,
-            NULL
+            test_common_setup,
+            NULL, MUNIT_TEST_OPTION_NONE, NULL
         },
         {
             "/f8/utf8_strnsize",
             test_utf8_strnsize,
-            test_utf8_strnsize_setup,
-            NULL,
-            MUNIT_TEST_OPTION_NONE,
-            NULL
+            test_common_setup,
+            NULL, MUNIT_TEST_OPTION_NONE, NULL
         },
         {NULL, NULL, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL}
-    },
-    NULL,
-    1,
-    MUNIT_SUITE_OPTION_NONE
+    }, NULL, 1, MUNIT_SUITE_OPTION_NONE
 };
 
 int main(int argc, char **argv)
