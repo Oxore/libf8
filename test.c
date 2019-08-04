@@ -2,23 +2,48 @@
 #include "munit.h"
 #include "test.h"
 
+#define STRING_1_BYTE_CHAR      "Single byte ascii symbols string"
+#define STRING_1_BYTE_CHAR_L    L"Single byte ascii symbols string"
+#define STRING_2_BYTE_CHAR \
+    "\u041A\u0438\u0440\u0438\u043B\u043B\u0438\u0446\u0430"
+#define STRING_2_BYTE_CHAR_L \
+    L"\u041A\u0438\u0440\u0438\u043B\u043B\u0438\u0446\u0430"
+#define STRING_3_BYTE_CHAR \
+    "\u0814\u0820\u080C\u081D\u0813\u0829\u0809\u080C"
+#define STRING_3_BYTE_CHAR_L \
+    L"\u0814\u0820\u080C\u081D\u0813\u0829\u0809\u080C"
+#define STRING_4_BYTE_CHAR      "𓁹𓁹𓁹𓁹𓁹"
+#define STRING_4_BYTE_CHAR_L    L"𓁹𓁹𓁹𓁹𓁹"
+
 const struct u_pair text_fixture[] = {
     {
-        .utf8  =  "Single byte ascii symbols string",
-        .utf32 = L"Single byte ascii symbols string"
+        .utf8  = STRING_1_BYTE_CHAR,
+        .utf32 = STRING_1_BYTE_CHAR_L,
+        .len = sizeof(STRING_1_BYTE_CHAR) - 1,
+        .size_utf8 = sizeof(STRING_1_BYTE_CHAR),
+        .size_utf32 = sizeof(STRING_1_BYTE_CHAR_L),
     },
     {
-        .utf8  =  "\u041A\u0438\u0440\u0438\u043B\u043B\u0438\u0446\u0430",
-        .utf32 = L"\u041A\u0438\u0440\u0438\u043B\u043B\u0438\u0446\u0430"
+        .utf8  = STRING_2_BYTE_CHAR,
+        .utf32 = STRING_2_BYTE_CHAR_L,
+        .len = (sizeof(STRING_2_BYTE_CHAR) - 1) / 2,
+        .size_utf8 = sizeof(STRING_2_BYTE_CHAR),
+        .size_utf32 = sizeof(STRING_2_BYTE_CHAR_L),
     },
     {
-        .utf8  =  "\u0814\u0820\u080C\u081D\u0813\u0829\u0809\u080C",
-        .utf32 = L"\u0814\u0820\u080C\u081D\u0813\u0829\u0809\u080C"
+        .utf8  = STRING_3_BYTE_CHAR,
+        .utf32 = STRING_3_BYTE_CHAR_L,
+        .len = (sizeof(STRING_3_BYTE_CHAR) - 1) / 3,
+        .size_utf8 = sizeof(STRING_3_BYTE_CHAR),
+        .size_utf32 = sizeof(STRING_3_BYTE_CHAR_L),
     },
     {
-        .utf8  =  "𓁹𓁹𓁹𓁹𓁹",
-        .utf32 = L"𓁹𓁹𓁹𓁹𓁹"
-    }
+        .utf8  = STRING_4_BYTE_CHAR,
+        .utf32 = STRING_4_BYTE_CHAR_L,
+        .len = (sizeof(STRING_4_BYTE_CHAR) - 1) / 4,
+        .size_utf8 = sizeof(STRING_4_BYTE_CHAR),
+        .size_utf32 = sizeof(STRING_4_BYTE_CHAR_L),
+    },
 };
 
 const size_t text_fixture_size = sizeof(text_fixture);

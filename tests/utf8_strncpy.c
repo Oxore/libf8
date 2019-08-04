@@ -18,8 +18,8 @@ static void *setup(const MunitParameter params[], void *user_data)
     const struct u_pair *tf = text_fixture;
     struct fixture *f = malloc((text_fixture_len + 1) * sizeof(struct fixture));
     for (size_t i = 0; i < text_fixture_len; i++) {
-        f[i].len = utf8_strlen(tf[i].utf8);
-        f[i].size = (f[i].len * (i + 1) + 1) * sizeof(char);
+        f[i].len = tf[i].len;
+        f[i].size = tf[i].size_utf8;
         f[i].str = malloc(f[i].size);
         f[i].str_copy = malloc(f[i].size);
         memset(f[i].str, 0xff, f[i].size);
