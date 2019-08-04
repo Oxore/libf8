@@ -17,6 +17,64 @@
 size_t utf8_strlen(const char *str);
 
 /*
+ * Copies UTF32 string.
+ *
+ * Writes at most `n` UTF32 characters null terminated string to the location
+ * pointed by `dest` which size is `destsz` bytes.
+ *
+ * The destination UTF32 string is always null terminated, even if all `n` or
+ * less characters of the source UTF32 string do not fit into `destsz` bytes.
+ *
+ * Returns `dest`.
+ *
+ * */
+int32_t *utf32_strncpy_s(int32_t *dest, size_t destsz, const int32_t *src,
+        size_t n);
+
+/*
+ * Copies UTF32 string.
+ *
+ * Writes null terminated UTF32 string to the location pointed by `dest` which
+ * size is `destsz` bytes.
+ *
+ * The destination UTF32 string is always null terminated, even if all
+ * characters of the source UTF32 string do not fit into `destsz` bytes.
+ *
+ * Returns dest.
+ *
+ * */
+int32_t *utf32_strcpy_s(int32_t *dest, size_t destsz, const int32_t *src);
+
+/*
+ * Copies UTF32 string.
+ *
+ * Writes at most `n` UTF32 characters null terminated string to the location
+ * pointed by `dest`.
+ *
+ * The destination UTF32 string is always null terminated. If the source UTF32
+ * string pointed by `src` has more than `n` bytes, then `n` bytes of the
+ * destination UTF32 string will be written to location pointed by `dest` plus
+ * null terminator character.
+ *
+ * BE CAREFUL: location pointed by `dest` should be able to hold at least (`n`
+ * + 1) * sizeof(*dest) bytes so null character can fit into it.
+ *
+ * Returns dest.
+ *
+ * */
+int32_t *utf32_strncpy(int32_t *dest, const int32_t *src, size_t n);
+
+/*
+ * Copies UTF32 string.
+ *
+ * Writes null terminated UTF32 string to the location pointed by `dest`.
+ *
+ * Returns dest.
+ *
+ * */
+int32_t *utf32_strcpy(int32_t *dest, const int32_t *src);
+
+/*
  * Converts UTF8 to UTF32.
  *
  * */
