@@ -37,6 +37,9 @@ static inline int32_t utf8to32_char(const char *c, size_t clen)
 
 size_t utf8_strlen(const char *string)
 {
+    if (string == NULL)
+        return 0;
+
     size_t len = 0, keep = 0;
     for (const char *c = string; *c; (keep ? --keep : ++len), ++c)
         if (!keep)
@@ -46,6 +49,9 @@ size_t utf8_strlen(const char *string)
 
 int32_t *utf8to32_strcpy(int32_t *dest, const char *src)
 {
+    if (dest == NULL || src == NULL)
+        return dest;
+
     int32_t *dc = dest;
     const char *c = src;
     size_t len = 0;
@@ -62,6 +68,9 @@ int32_t *utf8to32_strcpy(int32_t *dest, const char *src)
 
 char *utf8_strncpy(char *dest, const char *src, size_t n)
 {
+    if (dest == NULL || src == NULL || n == 0)
+        return dest;
+
     char *d = dest;
     for ( ; *src && n; --n) {
         size_t char_len = utf8_char_len(*src);
@@ -76,6 +85,9 @@ char *utf8_strncpy(char *dest, const char *src, size_t n)
 
 size_t utf8_strnsize(const char *str, size_t n)
 {
+    if (str == NULL)
+        return 0;
+
     size_t size = 0;
     for ( ; *str && n; --n) {
         size_t char_len = utf8_char_len(*str);
