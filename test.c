@@ -68,5 +68,8 @@ int main(int argc, char **argv)
 
     test_suite_f8.suites = suites;
 
-    return munit_suite_main(&test_suite_f8, NULL, argc, argv);
+    int ret = munit_suite_main(&test_suite_f8, NULL, argc, argv);
+
+    free(suites);
+    return ret;
 }
