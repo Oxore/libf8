@@ -8,7 +8,11 @@ ifeq ($(wildcard $(MUNIT)/*),)
 NOTEST=1
 endif
 
+SOURCES_TEST=$(wildcard tests/*.c)
+OBJECTS_TEST=$(SOURCES_TEST:.c=.c.o)
+
 INCLUDE+=$(MUNIT)
+INCLUDE+=.
 INCLUDE:=$(INCLUDE:%=-I%)
 
 #COMMON+=-fsanitize=address
@@ -22,19 +26,24 @@ CFLAGS+=-Wpedantic
 LDFLAGS+=$(COMMON)
 
 LDFLAGS_TEST+=$(LDFLAGS)
+LDFLAGS_TEST+=-lf8 -L.
 
 #======================================================================
 
 all:
 all: $(TARGET_LIB)
 ifndef NOTEST
+all: do_test
 all: $(TARGET_TEST)
 endif
 
-$(TARGET_TEST): $(TARGET_TEST).c.o $(MUNIT)/munit.c.o $(TARGET_LIB)
+do_test: $(TARGET_TEST)
+	./$<
+
+$(TARGET_TEST): $(TARGET_LIB)
+$(TARGET_TEST): $(TARGET_TEST).c.o $(MUNIT)/munit.c.o $(OBJECTS_TEST)
 	@ echo "  LD      $@"
 	$(Q) $(CC) -o $@ $^ $(LDFLAGS_TEST)
-	./test
 
 $(TARGET_LIB): f8.c.o
 	@ echo "  AR      $@"
@@ -46,6 +55,7 @@ $(TARGET_LIB): f8.c.o
 
 clean:
 	$(Q) $(RM) -rfv $(TARGET_TEST) $(TARGET_LIB) f8.c.o test.c.o
+	$(Q) $(RM) -rfv $(OBJECTS_TEST)
 	$(Q) $(RM) -rfv $(MUNIT)/*.o
 
 .PHONY: all clean do_test
