@@ -13,7 +13,10 @@ static MunitResult test_utf8to32_strcpy(const MunitParameter params[],
 
     for (size_t i = 0; i < text_fixture_len; i++) {
         size_t len = utf8_strlen(f[i].utf8);
-        int32_t *str = malloc((len + 1) * sizeof(int32_t));
+        size_t size = (len + 1) * sizeof(int32_t);
+        int32_t *str = malloc(size);
+        memset(str, 0xff, size);
+
         int32_t *dest = utf8to32_strcpy(str, f[i].utf8);
         munit_assert_ptr(dest, ==, str);
         munit_assert_uint(memcmp(str, f[i].utf32, len * sizeof(int32_t)),

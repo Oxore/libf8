@@ -15,6 +15,7 @@ static MunitResult test_utf8_strncpy(const MunitParameter params[],
         size_t len = utf8_strlen(f[i].utf8);
         size_t size = (len * (i + 1) + 1) * sizeof(char);
         char *str = malloc(size);
+        memset(str, 0xff, size);
 
         char *dest = utf8_strncpy(str, f[i].utf8, 100);
 
@@ -32,6 +33,7 @@ static MunitResult test_utf8_strncpy(const MunitParameter params[],
         for (size_t j = 0; j < len; j++) {
             size_t size = (j * (i + 1) + 1) * sizeof(char);
             char *str = malloc(size);
+            memset(str, 0xff, size);
 
             char *dest = utf8_strncpy(str, f[i].utf8, j);
 
