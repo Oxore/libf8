@@ -68,7 +68,7 @@ int32_t *utf8to32_strcpy(int32_t *dest, const char *src)
 
 char *utf8_strncpy(char *dest, const char *src, size_t n)
 {
-    if (dest == NULL || src == NULL || n == 0)
+    if (dest == NULL || src == NULL)
         return dest;
 
     char *d = dest;
