@@ -47,6 +47,26 @@ size_t utf8_strlen(const char *string)
     return len;
 }
 
+int32_t *utf8to32_strncpy_s(int32_t *dest, size_t destsz, const char *src,
+        size_t n)
+{
+    if (dest == NULL || src == NULL)
+        return dest;
+
+    size_t i = 0;
+    for (; n && *src && i + 1 < destsz / sizeof(int32_t); i++, n--) {
+        size_t clen = utf8_char_len(*src);
+        if ((dest[i] = utf8to32_char(src, clen)) == 0)
+            return dest; // Probably an invalid character
+        src += clen;
+    }
+
+    if (destsz >= sizeof(int32_t))
+        dest[i] = 0;
+
+    return dest;
+}
+
 int32_t *utf8to32_strcpy(int32_t *dest, const char *src)
 {
     if (dest == NULL || src == NULL)
