@@ -26,7 +26,7 @@ CFLAGS+=-Wpedantic
 LDFLAGS+=$(COMMON)
 
 LDFLAGS_TEST+=$(LDFLAGS)
-LDFLAGS_TEST+=-lf8 -L.
+LDFLAGS_TEST+=-l:$(TARGET_LIB) -L.
 
 #======================================================================
 
