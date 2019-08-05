@@ -67,23 +67,19 @@ int32_t *utf8to32_strncpy_s(int32_t *dest, size_t destsz, const char *src,
     return dest;
 }
 
+int32_t *utf8to32_strcpy_s(int32_t *dest, size_t destsz, const char *src)
+{
+    return utf8to32_strncpy_s(dest, destsz, src, SIZE_MAX);
+}
+
+int32_t *utf8to32_strncpy(int32_t *dest, const char *src, size_t n)
+{
+    return utf8to32_strncpy_s(dest, SIZE_MAX, src, n);
+}
+
 int32_t *utf8to32_strcpy(int32_t *dest, const char *src)
 {
-    if (dest == NULL || src == NULL)
-        return dest;
-
-    int32_t *dc = dest;
-    const char *c = src;
-    size_t len = 0;
-    while (*c) {
-        size_t clen = utf8_char_len(*c);
-        if ((dest[len] = utf8to32_char(c, clen)) == 0)
-            return dest; // Probably an invalid character
-        c += clen;
-        ++len;
-    }
-    dc[len] = 0;
-    return dest;
+    return utf8to32_strncpy_s(dest, SIZE_MAX, src, SIZE_MAX);
 }
 
 char *utf8_strncpy(char *dest, const char *src, size_t n)

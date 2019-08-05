@@ -52,7 +52,6 @@ const size_t text_fixture_len = sizeof(text_fixture)/sizeof(*text_fixture);
 extern MunitSuite test_suite_utf8_strlen;
 extern MunitSuite test_suite_utf8_strncpy;
 extern MunitSuite test_suite_utf8_strnsize;
-extern MunitSuite test_suite_utf8to32_strcpy;
 extern MunitSuite test_suite_utf8to32_strncpy_s;
 
 static MunitSuite test_suite_f8 = {
@@ -61,12 +60,11 @@ static MunitSuite test_suite_f8 = {
 
 int main(int argc, char **argv)
 {
-    MunitSuite *suites = calloc(6, sizeof(MunitSuite));
+    MunitSuite *suites = calloc(5, sizeof(MunitSuite));
     suites[0] = test_suite_utf8_strlen;
     suites[1] = test_suite_utf8_strncpy;
     suites[2] = test_suite_utf8_strnsize;
-    suites[3] = test_suite_utf8to32_strcpy;
-    suites[4] = test_suite_utf8to32_strncpy_s;
+    suites[3] = test_suite_utf8to32_strncpy_s;
 
     test_suite_f8.suites = suites;
 
