@@ -53,6 +53,7 @@ extern MunitSuite test_suite_utf8_strlen;
 extern MunitSuite test_suite_utf8_strncpy;
 extern MunitSuite test_suite_utf8_strnsize;
 extern MunitSuite test_suite_utf8to32_strncpy_s;
+extern MunitSuite test_suite_utf32to8_strncpy_s;
 
 static MunitSuite test_suite_f8 = {
     "/f8", NULL, NULL, 1, MUNIT_SUITE_OPTION_NONE
@@ -60,11 +61,12 @@ static MunitSuite test_suite_f8 = {
 
 int main(int argc, char **argv)
 {
-    MunitSuite *suites = calloc(5, sizeof(MunitSuite));
+    MunitSuite *suites = calloc(6, sizeof(MunitSuite));
     suites[0] = test_suite_utf8_strlen;
     suites[1] = test_suite_utf8_strncpy;
     suites[2] = test_suite_utf8_strnsize;
     suites[3] = test_suite_utf8to32_strncpy_s;
+    suites[4] = test_suite_utf32to8_strncpy_s;
 
     test_suite_f8.suites = suites;
 

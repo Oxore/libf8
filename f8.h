@@ -17,6 +17,21 @@
 size_t utf8_strlen(const char *str);
 
 /*
+ * Converts UTF32 to UTF8.
+ *
+ * Writes at most `n` UTF8 characters null terminated string to the location
+ * pointed by `dest` which size is `destsz` bytes.
+ *
+ * The destination UTF8 string is always null terminated, even if all `n` or
+ * less characters of the source UTF8 string does not fit into `destsz` bytes.
+ *
+ * Returns `dest`.
+ *
+ * */
+char *utf32to8_strncpy_s(char *dest, size_t destsz, const int32_t *src,
+        size_t n);
+
+/*
  * Converts UTF8 to UTF32.
  *
  * Writes at most `n` UTF32 characters null terminated string to the location

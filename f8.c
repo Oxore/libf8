@@ -47,6 +47,16 @@ size_t utf8_strlen(const char *string)
     return len;
 }
 
+char *utf32to8_strncpy_s(char *dest, size_t destsz, const int32_t *src,
+        size_t n)
+{
+    (void) dest;
+    (void) destsz;
+    (void) src;
+    (void) n;
+    return NULL;
+}
+
 int32_t *utf8to32_strncpy_s(int32_t *dest, size_t destsz, const char *src,
         size_t n)
 {
