@@ -37,6 +37,9 @@ static inline int32_t utf8to32_char(const char *c, size_t clen)
 
 static inline size_t utf32to8_char(char *buffer, int32_t code)
 {
+
+    /* Taken from https://stackoverflow.com/a/42013433 */
+
     if (code <= 0x7F) {
         buffer[0] = code;
         return 1;
@@ -96,6 +99,21 @@ char *utf32to8_strncpy_s(char *dest, size_t destsz, const int32_t *src,
         dest[i] = 0;
 
     return dest;
+}
+
+char *utf32to8_strcpy_s(char *dest, size_t destsz, const int32_t *src)
+{
+    return utf32to8_strncpy_s(dest, destsz, src, SIZE_MAX);
+}
+
+char *utf32to8_strncpy(char *dest, const int32_t *src, size_t n)
+{
+    return utf32to8_strncpy_s(dest, SIZE_MAX, src, n);
+}
+
+char *utf32to8_strcpy(char *dest, const int32_t *src)
+{
+    return utf32to8_strncpy_s(dest, SIZE_MAX, src, SIZE_MAX);
 }
 
 int32_t *utf8to32_strncpy_s(int32_t *dest, size_t destsz, const char *src,
